@@ -10,6 +10,10 @@ const soundPlay = new Audio('/sons/play.wav')
 const soundPause = new Audio('/sons/pause.mp3')
 const musicaFinalizada = new Audio('/sons/beep.mp3')
 const startPauseBt = document.querySelector('#start-pause')
+const iniciarOuPausarBt = document.querySelector('#start-pause span')
+const iniciarOuPausarImg = document.querySelector('#app__card-primary-butto-icon')
+const tempoNaTela= document.querySelector('#timer')
+
 let intervaloId = null
 
 const displayTempo  = document.querySelector('.app__card-timer')
@@ -73,9 +77,9 @@ function alterarContexto(contexto){
 
 const contagemRegressiva = () => {
     if(tempoDecorridoEmSegundos <=0){
-        zerar()
-        musicaFinalizada.play()
+        //musicaFinalizada.play()
         alert('Tempo finalizado!')
+        zerar()
         return
     }
     tempoDecorridoEmSegundos -=1;
@@ -86,15 +90,19 @@ startPauseBt.addEventListener('click', iniciarOuPausar);
 
 function iniciarOuPausar(){
     if(intervaloId){
-        zerar()
         soundPause.play();
+        zerar()
         return
     }
-    intervaloId = setInterval(contagemRegressiva, 1000)
+    iniciarOuPausarImg.setAttribute('src', '/imagens/pause.png')
     soundPlay.play();
+    intervaloId = setInterval(contagemRegressiva, 1000)
+    iniciarOuPausarBt.textContent='Pausar'
 }
 
 function zerar(){
     clearInterval(intervaloId)
+    iniciarOuPausarBt.textContent='Continuar'
+    iniciarOuPausarImg.setAttribute('src', '/imagens/play_arrow.png')
     intervaloId = null
 }

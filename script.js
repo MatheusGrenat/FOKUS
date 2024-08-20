@@ -24,7 +24,7 @@ const duracaoFoco = 1500
 const duracaoDescansoCurto = 300
 const duracaoDescansoLongo = 900
 musica.loop = true
-let tempoDecorridoEmSegundos = 5
+let tempoDecorridoEmSegundos = 1500
 
 musicaFocoInput.addEventListener('change', () => {
     if(musica.paused){
@@ -83,7 +83,7 @@ const contagemRegressiva = () => {
         return
     }
     tempoDecorridoEmSegundos -=1;
-    console.log('Temporizador: ' + tempoDecorridoEmSegundos)
+    mostrarTempo()
 }
 
 startPauseBt.addEventListener('click', iniciarOuPausar);
@@ -106,3 +106,10 @@ function zerar(){
     iniciarOuPausarImg.setAttribute('src', '/imagens/play_arrow.png')
     intervaloId = null
 }
+
+function mostrarTempo(){
+    const tempo = tempoDecorridoEmSegundos
+    tempoNaTela.innerHTML = `${tempo}`
+}
+
+mostrarTempo()
